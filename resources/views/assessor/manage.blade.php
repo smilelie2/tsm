@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title','Manage')
 <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -29,7 +30,9 @@
                                 <td> {{$nisit[$i-1]->name }}</td>
                                 <td> {{$nisit[$i-1]->surname }}</td>
                                 <td> {{$nisit[$i-1]->std_id }}</td>
+                                <td> <a href="manage/{{ $nisit[$i-1]->id }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></span> Add</a></td>
                                 <td> <a href="manage/{{ $nisit[$i-1]->id }}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></span> Edit</a></td>
+
                             </tr>
                         @endfor
                     </table>
