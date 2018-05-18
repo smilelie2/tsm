@@ -64,6 +64,8 @@ Route::post('/assessor/manage/{id}',"Assessor\AssessorController@Edit");
 
 Route::get('assessor/add/{id}',"Assessor\AssessorController@Add")->name('add');
 
+Route::get('assessor/del/{id}',"Assessor\AssessorController@Del")->name('del');
+
 Route::get('/assessor/nisitInYear',"Assessor\AssessorController@showNisitInYearForm")->name('nisitInYear'); // route setting Nisit in YearSchool
 
 Route::get('/assessor/workStatistic' ,['as' => 'assessor/workStatistic', "uses" => "Assessor\AssessorController@getWorkStatistic" ]);

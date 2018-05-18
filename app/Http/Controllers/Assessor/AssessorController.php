@@ -120,14 +120,20 @@ class AssessorController extends Controller
         return redirect()->back()->with("success","Edit successfully !");
     }
 
-    protected function Add(Request $request){
+    protected function Add($id){
         $this->checkType();
-        $id = $request->input('id');
         $yearschool = DB::select("SELECT * FROM yearschool WHERE start_date <= NOW() ORDER BY year DESC");
-        echo $yearschool[0]->year;
-        DB::insert("INSERT INTO memberyearschool VALUES ('?','?')",$id,$yearschool[0]->year);
+        DB::insert("INSERT INTO memberyearschool VALUES (?,?)",[$id,$yearschool[0]->year]);
         return $this->showManageForm();
     }
+
+    protected function Del($id){
+        $this->checkType();
+        $yearschool = DB::select("SELECT * FROM yearschool WHERE start_date <= NOW() ORDER BY year DESC");
+        DB::insert("DELETE FROM memberyearschool WHERE id_member=? AND year <= NOW()",[$id,$yearschool[0]->year]);
+        return $this->showManageForm();
+    }
+    
 
     protected function showNisitInYearForm(){
         $this->checkType();
