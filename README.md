@@ -31,3 +31,13 @@ _Parent Directory :_ `C:\xampp\htdocs`
 _Directory name :_ `<<project_name>>`
 6. Click **Clone**.  
 Finish
+
+## Config Database
+Path : `/.env`  
+Config :  
+`DB_CONNECTION=mysql`  
+`DB_HOST=127.0.0.1`  
+`DB_PORT=3306`  
+`DB_DATABASE=task_management_system`  
+`DB_USERNAME=root`  
+`DB_PASSWORD=12345`  
