@@ -22,7 +22,9 @@
                     @endif
                     <table border="1">
                         <tr><td>#</td><td>Username</td><td>E-mail</td><td>Name</td><td>Surname</td><td>Student ID</td></tr>
+
                         @for($i = 1; $i <= count($nisit); $i++)
+                            <?php $status = false; // false is have memberyearschool?>
                             <tr>
                                 <td> {{ $i }}</td>
                                 <td> {{$nisit[$i-1]->username }}</td>
@@ -30,7 +32,16 @@
                                 <td> {{$nisit[$i-1]->name }}</td>
                                 <td> {{$nisit[$i-1]->surname }}</td>
                                 <td> {{$nisit[$i-1]->std_id }}</td>
-                                <td> <a href="manage/{{ $nisit[$i-1]->id }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></span> Add</a></td>
+                                @for ($j = 0; $j < count($memberyearschool); $j++)
+                                    @if ($memberyearschool[$j]->id_member == $nisit[$i-1]->id)
+                                        <td> <a href="del/{{ $nisit[$i-1]->id }}" class="btn btn-danger btn-sm"><i class="fa fa-minus"></i></span> Del</a></td>
+                                        <?php $status = true; ?>
+                                        @break
+                                    @endif
+                                @endfor
+                                @if ($status == false)
+                                    <td> <a href="add/{{ $nisit[$i-1]->id }}" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></span> Add</a></td>
+                                @endif
                                 <td> <a href="manage/{{ $nisit[$i-1]->id }}" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></span> Edit</a></td>
 
                             </tr>

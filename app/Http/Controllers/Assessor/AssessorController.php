@@ -96,8 +96,9 @@ class AssessorController extends Controller
 
     protected function showManageForm() {
         $this->checkType();
-        $nisit = DB::select("SELECT id,username,email,name,surname,std_id FROM members WHERE type='NISIT'");
-        return view('assessor/manage',['nisit' => $nisit]);
+        $nisit = DB::select("SELECT id,username,email,name,surname,std_id FROM members WHERE type='NISIT' ");
+        $memberyearschool = DB::select("SELECT * FROM memberyearschool WHERE year <= NOW() ORDER BY year DESC");
+        return view('assessor/manage',['nisit' => $nisit,'memberyearschool' => $memberyearschool]);
     } // Show Manage Form
     protected function showEditForm($id) {
         $this->checkType();
@@ -118,6 +119,16 @@ class AssessorController extends Controller
         DB::update("UPDATE members SET email='$email',name='$name',surname='$surname' WHERE id=$id");
         return redirect()->back()->with("success","Edit successfully !");
     }
+
+    protected function Add(Request $request){
+        $this->checkType();
+        $id = $request->input('id');
+        $yearschool = DB::select("SELECT * FROM yearschool WHERE start_date <= NOW() ORDER BY year DESC");
+        echo $yearschool[0]->year;
+        DB::insert("INSERT INTO memberyearschool VALUES ('?','?')",$id,$yearschool[0]->year);
+        return $this->showManageForm();
+    }
+
     protected function showNisitInYearForm(){
         $this->checkType();
         $nisit = DB::select("SELECT members.name,members.surname,members.std_id,memberyearschool.year FROM members,memberyearschool WHERE members.id=memberyearschool.id_member");
