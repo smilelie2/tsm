@@ -40,4 +40,4 @@ Config :
 `DB_PORT=3306`  
 `DB_DATABASE=task_management_system`  
 `DB_USERNAME=root`  
-`DB_PASSWORD=12345`  
+`DB_PASSWORD=12345`    
