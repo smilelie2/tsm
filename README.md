@@ -13,12 +13,8 @@ _route_ : `route/web.php`
 ## How to run
 1. Copy this project to `C:/xampp/htdocs/<<<project_name>>>`  
 _`default name : projectWebappv3`_
-2. if you installed laravel and composer, **skip to 3.**  
-install Composer -> install Laravel
-3. open `command prompt`  
-4. go to project `cd c:/xampp/htdocs/<<project_name>>`
-5. `php artisan serve`
-6. In browser. URL `localhost:8000`
+2. Open `XAMPP`
+3. In browser, URL : `localhost/<<project_name>>`
 
 ## How to get code in PhpStorm
 1. Register github (https://github.com/join?source=header-home)
