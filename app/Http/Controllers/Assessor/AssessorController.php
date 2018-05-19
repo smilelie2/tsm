@@ -103,7 +103,7 @@ class AssessorController extends Controller
         $this->checkType();
         $yearschool = DB::select("SELECT * FROM yearschool WHERE start_date <= NOW() ORDER BY year DESC"); // Get ปีการศึกษาปัจจุบันในเวลานี้
         $nisit = DB::select("SELECT id,username,email,name,surname,std_id FROM members WHERE type='NISIT' ");
-        $memberyearschool = DB::select("SELECT * FROM memberyearschool WHERE year <= NOW() ORDER BY year DESC");
+        $memberyearschool = DB::select("SELECT * FROM memberyearschool WHERE year <= YEAR(NOW()) AND year >= YEAR(NOW()) ORDER BY year DESC");
         return view('assessor/manage',['nisit' => $nisit,'memberyearschool' => $memberyearschool, 'yearschool' => $yearschool[0]->year]);
     } // Show Manage Form
     protected function showEditForm($id) {
