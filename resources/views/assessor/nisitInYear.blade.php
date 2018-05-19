@@ -4,7 +4,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header"> {{ __('Manage')}}</div>
 
@@ -19,7 +19,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <table border="1">
+                    <table border="1" class="table table-striped">
                         <tr><td>#</td><td>Name</td><td>Surname</td><td>Student ID</td><td>Year</td></tr>
                         @for($i = 1; $i <= count($nisit); $i++)
                             <tr>

@@ -60,8 +60,8 @@
                         </div>
                     </form>
 
-                        <table border="1">
-                            <tr><td>Rank</td><td>ID Nisit</td><td>Student ID</td><td>Name</td><td>Surname</td><td>Overall Time</td><td>Year school</td></tr>
+                        <table border="1" class="table table-striped" >
+                            <tr><td>Rank</td><td>Nisit ID</td><td>Student ID</td><td>Name</td><td>Surname</td><td>Overall Time</td><td>Year school</td></tr>
                             @for($i = 1; $i <= count($work); $i++)
                                 <tr>
                                     <td> {{ $i }}</td>

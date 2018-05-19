@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Dashboard {{ "(Year school : " }} {{ $yearschool.")" }}</div>
 
@@ -64,8 +64,8 @@
                         </div>
                     </form>
 
-                        <table border="1">
-                            <tr><td>#</td><td>Name</td><td>created_date</td><td>due_time</td><td>info</td><td>year_school</td><td>patron</td><td>status</td>
+                        <table border="1" class="table table-striped">
+                            <tr><td>Rank</td><td>Name</td><td>Created Date</td><td>Due Time</td><td>Information</td><td>Year School</td><td>patron</td><td>status</td>
                                 <td>nisit_booked</td><td>complete_date</td><td>used_time</td><td>summary</td></tr>
                             @for($i = 1; $i <= count($work); $i++)
                                 <tr>
