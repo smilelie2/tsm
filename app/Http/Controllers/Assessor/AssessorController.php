@@ -9,16 +9,19 @@ use Illuminate\Support\Facades\DB;
 
 class AssessorController extends Controller
 {
+
     protected function checkType() {
         if (Auth::user()->type != 'ASSESSOR') {
             return redirect('/home');
         }
     } // Auth
+
     public function __construct()
     {
         $this->middleware('auth');
     } // Auth
     protected function getWorkStatistic(Request $request) {
+        $yearschool = DB::select("SELECT * FROM yearschool WHERE start_date <= NOW() ORDER BY year DESC");
         if (Auth::user()->type != 'ASSESSOR') {
             return redirect('/home');
         }
@@ -29,7 +32,7 @@ class AssessorController extends Controller
             $name = $request->input('name');
             $work = DB::select("SELECT works.id, works.name, `created_date`, `due_time`, `info`, `year_school`, `patron`, `status`, `nisit_booked`, `booked_date`, `complete_date`, `used_time`, `summary` FROM members,`works` WHERE members.name=? AND members.id = works.nisit_booked",[$name]);
         }
-        return view('/assessor/workStatistic',['work' => $work]);
+        return view('/assessor/workStatistic',['work' => $work,'yearschool' => $yearschool[0]->year]);
     } // Show Work Statistic Form
     /* public function getNisitStatistic(Request $request) {
         if (Auth::user()->type != 'ASSESSOR') {
@@ -47,6 +50,7 @@ class AssessorController extends Controller
 
     protected function getHoursNisit(Request $request) {
         $this->checkType();
+        $yearschool = DB::select("SELECT * FROM yearschool WHERE start_date <= NOW() ORDER BY year DESC"); // Get ปีการศึกษาปัจจุบันในเวลานี้
         $year = $request->input('year');
         $name = $request->input('name');
         if ($year == 'all' && $name == null || $year == null)
@@ -57,11 +61,12 @@ class AssessorController extends Controller
             $work = DB::select("SELECT `nisit_booked`,members.std_id, members.name , members.surname, IF(SEC_TO_TIME( SUM( TIME_TO_SEC( `used_time` ) ) ) IS NULL,'00:00:00',SEC_TO_TIME( SUM( TIME_TO_SEC( `used_time` ) ) )) as overall_time,year_school FROM members,works WHERE nisit_booked IS NOT NULL AND members.id=nisit_booked AND members.name LIKE '%$name%' GROUP BY `nisit_booked`,year_school ORDER BY year_school ASC, overall_time DESC");
         else
             $work = DB::select("SELECT `nisit_booked`,members.std_id, members.name , members.surname, IF(SEC_TO_TIME( SUM( TIME_TO_SEC( `used_time` ) ) ) IS NULL,'00:00:00',SEC_TO_TIME( SUM( TIME_TO_SEC( `used_time` ) ) )) as overall_time,year_school FROM members,works WHERE nisit_booked IS NOT NULL AND members.id=nisit_booked AND year_school=? AND members.name LIKE '%$name%' GROUP BY `nisit_booked`,year_school ORDER BY year_school ASC, overall_time DESC",[$year]);
-        return view('/assessor/nisitStatistic',['work' => $work]);
+        return view('/assessor/nisitStatistic',['work' => $work, 'yearschool' => $yearschool[0]->year]);
     } // Show All Nisit -> Overall time
 
     protected function getHistory($id,Request $request) {
         $this->checkType();
+        $yearschool = DB::select("SELECT * FROM yearschool WHERE start_date <= NOW() ORDER BY year DESC"); // Get ปีการศึกษาปัจจุบันในเวลานี้
         $year = $request->input('year');
         $month = $request->input('month');
         if(($year == 'all' || $year == null) && ($month == 'all' || $month == null)) // Access First OR Both select all
@@ -72,7 +77,7 @@ class AssessorController extends Controller
             $work = DB::select("SELECT * FROM works WHERE nisit_booked=? AND MONTH(created_date)=?",[$id,$month]);
         else
             $work = DB::select("SELECT * FROM works WHERE nisit_booked=? AND year_school=? AND MONTH(created_date)=?",[$id,$year,$month]);
-        return view('/assessor/nisitStatisticById',['work' => $work, 'id' => $id]);
+        return view('/assessor/nisitStatisticById',['work' => $work, 'id' => $id, 'yearschool' => $yearschool[0]->year]);
     } // Show History by ID Form
 
     protected function showSetDateForm(){
@@ -96,14 +101,16 @@ class AssessorController extends Controller
 
     protected function showManageForm() {
         $this->checkType();
+        $yearschool = DB::select("SELECT * FROM yearschool WHERE start_date <= NOW() ORDER BY year DESC"); // Get ปีการศึกษาปัจจุบันในเวลานี้
         $nisit = DB::select("SELECT id,username,email,name,surname,std_id FROM members WHERE type='NISIT' ");
         $memberyearschool = DB::select("SELECT * FROM memberyearschool WHERE year <= NOW() ORDER BY year DESC");
-        return view('assessor/manage',['nisit' => $nisit,'memberyearschool' => $memberyearschool]);
+        return view('assessor/manage',['nisit' => $nisit,'memberyearschool' => $memberyearschool, 'yearschool' => $yearschool[0]->year]);
     } // Show Manage Form
     protected function showEditForm($id) {
         $this->checkType();
         $nisit = DB::select("SELECT id,username,email,name,surname,std_id FROM members WHERE id=$id");
-        return view('assessor/edit',['nisit' => $nisit]);
+        $yearschool = DB::select("SELECT * FROM yearschool WHERE start_date <= NOW() ORDER BY year DESC"); // Get ปีการศึกษาปัจจุบันในเวลานี้
+        return view('assessor/edit',['nisit' => $nisit,'yearschool' => $yearschool[0]->year]);
     } // Manage Form -> Edit Form
     protected function Edit(Request $request){
         $this->checkType();
