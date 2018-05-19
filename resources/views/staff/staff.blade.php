@@ -24,8 +24,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ Auth::user()->type }} {{ " , Page of STAFF " }}
                     <table border="1">
                         <tr><td>#</td><td>Name</td><td>created_date</td><td>due_time</td><td>info</td><td>year_school</td><td>patron</td><td>status</td>
                             <td>nisit_booked</td><td>complete_date</td><td>used_time</td><td>summary</td></tr>
