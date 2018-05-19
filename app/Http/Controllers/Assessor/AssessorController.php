@@ -86,16 +86,18 @@ class AssessorController extends Controller
     } // Show Set Form
     protected function setDate(Request $request) {
         $this->checkType();
-        $year = $request->input('year');
+        $year = 2017;
         $month = $request->input('month');
         $check_match_month = DB::select("SELECT MONTH(start_date) as start_date FROM yearschool WHERE year=$year");
         if ($check_match_month[0]->start_date == $month)
             return redirect()->back()->with("error","Set new month cannot be same as your current month");
-        if($month < 10)
-            $str_date=$year."-0".$month."-01";
-        else
-            $str_date=$year."-".$month."-01";
-        DB::update("UPDATE `yearschool` SET `start_date`='$str_date' WHERE year=$year");
+        for (;$year <= 2020;$year++) {
+            if ($month < 10)
+                $str_date = $year . "-0" . $month . "-01";
+            else
+                $str_date = $year . "-" . $month . "-01";
+            DB::update("UPDATE `yearschool` SET `start_date`='$str_date' WHERE year=$year");
+        }
         return redirect()->back()->with("success","Changed successfully !");
     } // Set First Month of Year School
 
@@ -103,7 +105,10 @@ class AssessorController extends Controller
         $this->checkType();
         $yearschool = DB::select("SELECT * FROM yearschool WHERE start_date <= NOW() ORDER BY year DESC"); // Get ปีการศึกษาปัจจุบันในเวลานี้
         $nisit = DB::select("SELECT id,username,email,name,surname,std_id FROM members WHERE type='NISIT' ");
-        $memberyearschool = DB::select("SELECT * FROM memberyearschool WHERE year <= YEAR(NOW()) AND year >= YEAR(NOW()) ORDER BY year DESC");
+        $memberyearschool = DB::select("SELECT * FROM `memberyearschool`,yearschool WHERE memberyearschool.year = yearschool.year AND 
+yearschool.start_date <= now() AND 
+yearschool.start_date >= YEAR(now())-1 AND memberyearschool.year >= YEAR(now())-1
+AND yearschool.year = IF(MONTH(NOW())>=MONTH(yearschool.start_date),YEAR(NOW()),YEAR(NOW())-1)");
         return view('assessor/manage',['nisit' => $nisit,'memberyearschool' => $memberyearschool, 'yearschool' => $yearschool[0]->year]);
     } // Show Manage Form
     protected function showEditForm($id) {

@@ -21,14 +21,6 @@
                     <form method="POST" action="{{ route('assessor/setdate') }}">
                         {{ csrf_field() }}
                         <div class="form-group row">
-                            <label for="year" class="col-md-2 col-form-label text-md-right">{{ __('Year') }}</label>
-                            <div class="col-md-2">
-                                <select class="form-control" name="year">
-                                    <option value="2017" selected>2017</option>
-                                    <option value="2018" <?php if(isset($_POST['year'])) { if($_POST['year'] == 2018) { echo "selected" ;} }?>>2018</option>
-                                    <option value="2019" <?php if(isset($_POST['year'])) { if($_POST['year'] == 2019) { echo "selected" ;} }?>>2019</option>
-                                </select>
-                            </div>
                             <label for="month" class="col-md-2 col-form-label text-md-right">{{ __('Start Month') }}</label>
                             <div class="col-md-2">
                                 <select class="form-control" name="month">
