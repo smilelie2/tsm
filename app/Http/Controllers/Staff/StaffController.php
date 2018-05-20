@@ -17,7 +17,7 @@ class StaffController extends Controller
         if (Auth::user()->type != 'STAFF') {
             return redirect('/home');
         }
-        $work = DB::select("SELECT * FROM works WHERE patron=?",[Auth::user()->id]);
+        $work = DB::select("(SELECT * FROM works WHERE patron=?) ORDER BY status ASC",[Auth::user()->id]);
         return view('/staff/staff',['work' => $work]);
     }
     protected function createWork(Request $request) {
