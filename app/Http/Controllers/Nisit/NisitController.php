@@ -73,14 +73,17 @@ STATUS
 ORDER BY
 STATUS ASC
 ) AS tt,
-yearschool, memberyearschool, members
+yearschool,
+memberyearschool,
+members
 WHERE
-yearschool.year = memberyearschool.year AND memberyearschool.id_member = members.id AND 
-members.id =? AND 
-    yearschool.start_date <= NOW() AND yearschool.start_date >= YEAR(NOW()) -1 AND work_year_school = IF(
-        MONTH(NOW()) >= MONTH(yearschool.start_date),
+    yearschool.year = memberyearschool.year AND memberyearschool.id_member = members.id AND members.id = ? AND yearschool.start_date <= NOW() AND YEAR(yearschool.start_date) >=
+    IF(MONTH(NOW()) >= MONTH(yearschool.start_date),
         YEAR(NOW()),
-        YEAR(NOW()) -1)",[Auth::user()->id,Auth::user()->id]);
+        YEAR(NOW()) -1) AND work_year_school = IF(
+            MONTH(NOW()) >= MONTH(yearschool.start_date),
+            YEAR(NOW()),
+            YEAR(NOW()) -1)",[Auth::user()->id,Auth::user()->id]);
         return view('/nisit/nisit',['work' => $work]);
     }
 
