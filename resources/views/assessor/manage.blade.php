@@ -20,7 +20,7 @@
                             {{ session('success') }}
                         </div>
                     @endif
-                    <table border="1" class="col-md">
+                    <table border="1" class="table table-striped">
                         <tr><td>#</td><td>Username</td><td>E-mail</td><td>Name</td><td>Surname</td><td>Student ID</td></tr>
 
                         @for($i = 1; $i <= count($nisit); $i++)

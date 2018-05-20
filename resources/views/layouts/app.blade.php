@@ -51,6 +51,9 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                                     @if(Auth::user()->type == 'ASSESSOR')
+                                        <a class="dropdown-item" href="/assessor/workStatistic">
+                                            Dashboard
+                                        </a>
                                         <a class="dropdown-item" href="{{ route('manage') }}">
                                             Manage members
                                         </a>
@@ -60,6 +63,7 @@
                                         <a class="dropdown-item" href="{{ route('register') }}">
                                             Register
                                         </a>
+
                                     @endif
 
                                     <a class="dropdown-item" href="/changePassword">

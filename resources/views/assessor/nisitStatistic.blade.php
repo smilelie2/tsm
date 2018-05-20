@@ -64,6 +64,7 @@
                             <tr><td>Rank</td><td>Nisit ID</td><td>Student ID</td><td>Name</td><td>Surname</td><td>Overall Time</td><td>Year school</td></tr>
                             @for($i = 1; $i <= count($work); $i++)
                                 <tr>
+                                    
                                     <td> {{ $i }}</td>
                                     <td> {{$work[$i-1]->nisit_booked }}</td>
                                     <td> {{$work[$i-1]->std_id }}</td>
