@@ -10,7 +10,7 @@
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('nisit') }}">
-                        @csrf
+                        {{ csrf_field() }}
                         <input id="id_work" type="hidden" name="id_work" value="{{$work[0]->id}}">
                         <div class="form-group row">
                             <label for="work_time" class="col-md-4 col-form-label text-md-right">{{ __('Working time (HH:mm)') }}</label>
