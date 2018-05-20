@@ -26,7 +26,7 @@ class AssessorController extends Controller
             return redirect('/home');
         }
         if($request->input('name') == null) {
-            $work = DB::select("SELECT * FROM works WHERE 1");
+            $work = DB::select("SELECT * FROM works WHERE 1 ORDER BY year_school DESC,status ASC");
         }
         else {
             $name = $request->input('name');

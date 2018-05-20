@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"> {{ __('Set the first day of the school year.')}}</div>
+                <div class="card-header"> {{ __('Set the first month of the school year.')}}</div>
 
                 <div class="card-body">
                     @if (session('error'))
