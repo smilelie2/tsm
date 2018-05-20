@@ -42,7 +42,6 @@
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -52,14 +51,14 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                                     @if(Auth::user()->type == 'ASSESSOR')
-                                        <a class="dropdown-item" href="{{ route('nisitInYear') }}">
-                                            Nisit in years
-                                        </a>
                                         <a class="dropdown-item" href="{{ route('manage') }}">
                                             Manage members
                                         </a>
                                         <a class="dropdown-item" href="/assessor/setdate">
                                             Setting
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('register') }}">
+                                            Register
                                         </a>
                                     @endif
 
