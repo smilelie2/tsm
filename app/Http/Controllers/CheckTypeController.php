@@ -19,7 +19,7 @@ class CheckTypeController extends Controller
             return redirect('/staff');
         }
         else if(Auth::user()->type == 'ASSESSOR') {
-            return redirect('/assessor');
+            return redirect('/assessor/workStatistic');
         }
     }
 }

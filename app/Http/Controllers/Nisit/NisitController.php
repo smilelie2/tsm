@@ -25,7 +25,7 @@ INNER JOIN yearschool
 INNER JOIN members mp 
 	ON mp.id=works.patron
 LEFT JOIN members mn 
-	ON mn.id=works.nisit_booked WHERE status='WAITING' OR ((status='BOOKED' OR status='COMPLETE') AND nisit_booked=?) ",[Auth::user()->id]);
+	ON mn.id=works.nisit_booked WHERE status='WAITING' OR ((status='BOOKED' OR status='COMPLETE') AND nisit_booked=?) ORDER BY status ASC ",[Auth::user()->id]);
         return view('/nisit/nisit',['work' => $work]);
     }
 
