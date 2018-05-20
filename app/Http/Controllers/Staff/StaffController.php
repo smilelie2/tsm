@@ -33,4 +33,15 @@ VALUES (?,NOW(),?,?,IF(MONTH(now())>=?,YEAR(now()),YEAR(now())-1),?,'WAITING')",
         return $this->getYourWork();
 
     }
+    protected function saving($id) {
+        $work = DB::select("SELECT id,name FROM works WHERE id=?",[$id]);
+        return view('/staff/savestaff',['work' => $work]);
+    }
+    public function saved(Request $request) {
+        $id_work = $request->input('id_work');
+        $work_time = $request->input('work_time');
+        $summary = $request->input('summary');
+        DB::update("UPDATE `works` SET `status`='COMPLETE',`complete_date`=now(),`used_time`=?,`summary`=? WHERE id=?",[$work_time,$summary,$id_work]);
+        return $this->getYourWork();
+    }
 }

@@ -44,6 +44,11 @@ Route::get('/staff/create', function () {
     return View::make('/staff/creating');
 });
 
+Route::get('/staff/savestaff/{id}', 'Nisit\NisitController@saving');
+Route::get('/nisit/savedstaff/{id}', function (){
+    return View::make('/staff');
+});
+
 Route::post('/staff' ,['as' => 'staff', "uses" => "Staff\StaffController@createWork" ]);
 //========================================
 
