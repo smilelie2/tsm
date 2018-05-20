@@ -68,17 +68,19 @@ STATUS
             = 'BOOKED' OR
         STATUS
             = 'COMPLETE'
-    ) AND nisit_booked = 1
+    ) AND nisit_booked = ?
     ) AND memberyearschool.id_member = mn.id
 ORDER BY
 STATUS ASC
 ) AS tt,
-yearschool
+yearschool, memberyearschool, members
 WHERE
+yearschool.year = memberyearschool.year AND memberyearschool.id_member = members.id AND 
+members.id =? AND 
     yearschool.start_date <= NOW() AND yearschool.start_date >= YEAR(NOW()) -1 AND work_year_school = IF(
         MONTH(NOW()) >= MONTH(yearschool.start_date),
         YEAR(NOW()),
-        YEAR(NOW()) -1)",[Auth::user()->id]);
+        YEAR(NOW()) -1)",[Auth::user()->id,Auth::user()->id]);
         return view('/nisit/nisit',['work' => $work]);
     }
 
