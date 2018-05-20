@@ -40,11 +40,11 @@
                                 <td> {{$work[$i-1]->year_school }}</td>
                                 <td> {{$work[$i-1]->patron }}</td>
                                 @if ($work[$i-1]->status == 'BOOKED')
-                                    <td class="p-3 mb-2 bg-warning text-white"> {{$work[$i-1]->id}} </td>
+                                    <td class="p-3 mb-2 bg-warning text-white"> {{$work[$i-1]->status}} </td>
                                 @elseif ($work[$i-1]->status == 'WAITING')
-                                    <td class="p-3 mb-2 bg-primary text-white"> {{$work[$i-1]->id}} </td>
+                                    <td class="p-3 mb-2 bg-primary text-white"> {{$work[$i-1]->status}} </td>
                                 @elseif ($work[$i-1]->status == 'COMPLETE')
-                                    <td class="p-3 mb-2 bg-success text-white"> {{$work[$i-1]->id}} </td>
+                                    <td class="p-3 mb-2 bg-success text-white"> {{$work[$i-1]->status}} </td>
                                 @endif
                                 <td> {{$work[$i-1]->nisit_booked }}</td>
                                 <td> {{$work[$i-1]->complete_date }}</td>

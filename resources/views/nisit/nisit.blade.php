@@ -10,7 +10,7 @@
 
                     <div class="card-body">
                         <table border="1" class="table table-striped">
-                            <tr><td>#</td><td>Name</td><td>created_date</td><td>due_time</td><td>info</td><td>ปีการศึกษา</td><td>ชื่อผู้สั่ง</td><td>นามสกุลผู้สั่ง</td>
+                            <tr><td>#</td><td>Name</td><td>created_date</td><td>&nbsp&nbsp&nbspdue_time&nbsp&nbsp&nbsp</td><td>info</td><td>ปีการศึกษา</td><td>ชื่อผู้สั่ง</td><td>นามสกุลผู้สั่ง</td>
                                 <td>status</td><td>ชื่อนิสิต</td><td>นามสกุล</td><td>complete_date</td><td>used_time</td><td>summary</td></tr>
                             @for($i = 1; $i <= count($work); $i++)
                                 <tr>
@@ -35,12 +35,24 @@
                                     <td> {{$work[$i-1]->work_used_time }}</td>
                                     <td> {{$work[$i-1]->work_summary }}</td>
                                     @if ($work[$i-1]->work_status == 'WAITING')
-                                        <td><a href="/nisit/book/{{$work[$i-1]->work_id}}">Book now</a></td>
+                                        <script>
+                                            function ConfirmBook() {
+                                                var x = confirm("Are you sure want to book?");
+                                                if (x)
+                                                    return true;
+                                                else
+                                                    return false;
+                                            }
+                                        </script>
+                                        <td align = 'center' ><a href="/nisit/book/{{$work[$i-1]->work_id}}" onclick="return ConfirmBook()"><button  type="button" class="btn btn-primary">Book now</button></a></td>
                                     @elseif ($work[$i-1]->work_status == 'BOOKED')
-                                        <td><a href="/nisit/savenisit/{{$work[$i-1]->work_id}}">Save Complete</a></td>
+                                        <td align = 'center'><a href="/nisit/savenisit/{{$work[$i-1]->work_id}}"><button type="button" class="btn btn-success">Save Complete</button></a></td>
                                     @endif
                                 </tr>
+
                             @endfor
+
+
                         </table>
                     </div>
                 </div>
