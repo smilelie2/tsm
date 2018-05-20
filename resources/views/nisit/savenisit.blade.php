@@ -16,7 +16,7 @@
                             <label for="work_time" class="col-md-4 col-form-label text-md-right">{{ __('Working time (HH:mm)') }}</label>
 
                             <div class="col-md-6">
-                                <input id="work_time" type="time" class="form-control{{ $errors->has('work_time') ? ' is-invalid' : '' }}" name="work_time" value="{{ old('work_time') }}" required autofocus>
+                                <input id="work_time" type="time" class="form-control{{ $errors->has('work_time') ? ' is-invalid' : '' }}" name="work_time" value="00:00" required autofocus>
 
                                 @if ($errors->has('work_time'))
                                     <span class="invalid-feedback">
