@@ -17,7 +17,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Create work') }}</div>
+                <div class="card-header"> <button type="button" class="btn btn-danger">{{ __('Create work') }}</button></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('staff') }}">
